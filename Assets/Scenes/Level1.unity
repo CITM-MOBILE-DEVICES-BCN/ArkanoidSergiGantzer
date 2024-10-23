@@ -2332,7 +2332,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -184.41203, y: 0, z: -121.18507, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -5540,6 +5540,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 974927882}
     - target: {fileID: 4737271572195420294, guid: 2fb1462229549c04faee7deced533962, type: 3}
+      propertyPath: levelText
+      value: 
+      objectReference: {fileID: 34542564}
+    - target: {fileID: 4737271572195420294, guid: 2fb1462229549c04faee7deced533962, type: 3}
       propertyPath: livesText
       value: 
       objectReference: {fileID: 24514056}
@@ -5555,6 +5559,10 @@ PrefabInstance:
       propertyPath: gameOverSound
       value: 
       objectReference: {fileID: 8300000, guid: d17c0b33979371b409ff64f606e922e7, type: 3}
+    - target: {fileID: 4737271572195420294, guid: 2fb1462229549c04faee7deced533962, type: 3}
+      propertyPath: highScoreText
+      value: 
+      objectReference: {fileID: 902245666}
     - target: {fileID: 4737271572195420294, guid: 2fb1462229549c04faee7deced533962, type: 3}
       propertyPath: lifeLostSound
       value: 

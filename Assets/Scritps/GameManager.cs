@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI livesText;
+    [SerializeField] private TextMeshProUGUI highScoreText;
+    [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] public GameObject ballPrefab;
     [SerializeField] private Transform platform;
     [SerializeField] private AudioClip lifeLostSound;
@@ -36,6 +38,8 @@ public class GameManager : MonoBehaviour
     {
         blocksLeft = GameObject.FindGameObjectsWithTag("Block").Length;
         audioSource = gameObject.AddComponent<AudioSource>();
+        score = PlayerPrefs.GetInt("CurrentScore", 0);
+        lives = PlayerPrefs.GetInt("CurrentLives", 3);
         UpdateUI();
         RespawnBall();
     }
@@ -49,7 +53,11 @@ public class GameManager : MonoBehaviour
         if (blocksLeft <= 0 && !isLevelCleared)
         {
             isLevelCleared = true;
-            SceneManager.LoadScene(5); // Carga la escena de nivel completado
+            int currentLevel = PlayerPrefs.GetInt("CurrentLevel", 1);
+            PlayerPrefs.SetInt("CurrentLevel", currentLevel + 1);
+            PlayerPrefs.SetInt("CurrentScore", score);
+            PlayerPrefs.SetInt("CurrentLives", lives);
+            LoadNextLevel();
         }
     }
 
@@ -97,6 +105,11 @@ public class GameManager : MonoBehaviour
         if (lives <= 0)
         {
             PlaySound(gameOverSound);
+            int highScore = PlayerPrefs.GetInt("HighScore", 0);
+            if (score > highScore)
+            {
+                PlayerPrefs.SetInt("HighScore", score);
+            }
             Invoke("LoadGameOverScene", gameOverSound.length);
         }
 
@@ -124,6 +137,8 @@ public class GameManager : MonoBehaviour
     {
         scoreText.text = "Score: " + score;
         livesText.text = "Lives: " + lives;
+        highScoreText.text = "High Score: " + PlayerPrefs.GetInt("HighScore", 0);
+        levelText.text = "Level: " + PlayerPrefs.GetInt("CurrentLevel", 1);
     }
 
     private void PlaySound(AudioClip clip)
@@ -134,8 +149,34 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void IncreaseScore(int amount) // Cambiado de private a public
+    public void IncreaseScore(int amount)
     {
         score += amount;
+        int highScore = PlayerPrefs.GetInt("HighScore", 0);
+        if (score > highScore)
+        {
+            PlayerPrefs.SetInt("HighScore", score);
+        }
+    }
+
+    public int GetScore()
+    {
+        return score;
+    }
+
+    public int GetLives()
+    {
+        return lives;
+    }
+
+    public void ResetGameState()
+    {
+        Debug.Log("GameManager: ResetGameState method called.");
+        score = 0;
+        lives = 3;
+        PlayerPrefs.SetInt("CurrentLevel", 1);
+        PlayerPrefs.SetInt("CurrentScore", score);
+        PlayerPrefs.SetInt("CurrentLives", lives);
+        UpdateUI();
     }
 }

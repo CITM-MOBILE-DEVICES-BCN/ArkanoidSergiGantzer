@@ -42,6 +42,7 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMainMenu()
     {
+        SaveGame();
         Time.timeScale = 1f;
         SceneManager.LoadScene(3);
     }
@@ -60,5 +61,12 @@ public class PauseMenu : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    private void SaveGame()
+    {
+        PlayerPrefs.SetInt("CurrentScore", GameManager.Instance.GetScore());
+        PlayerPrefs.SetInt("CurrentLives", GameManager.Instance.GetLives());
+        PlayerPrefs.SetInt("CurrentLevel", PlayerPrefs.GetInt("CurrentLevel", 1));
     }
 }

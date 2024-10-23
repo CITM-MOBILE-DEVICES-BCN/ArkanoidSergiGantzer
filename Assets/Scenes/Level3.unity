@@ -701,7 +701,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 54.766113, y: -567.2631}
+  m_AnchoredPosition: {x: 36, y: -567.2631}
   m_SizeDelta: {x: -1820, y: 161}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &267598885 stripped
@@ -4088,7 +4088,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -94.84041, y: 0, z: -165.09285, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -7251,6 +7251,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 954426211}
     - target: {fileID: 4737271572195420294, guid: 2fb1462229549c04faee7deced533962, type: 3}
+      propertyPath: levelText
+      value: 
+      objectReference: {fileID: 2046172591}
+    - target: {fileID: 4737271572195420294, guid: 2fb1462229549c04faee7deced533962, type: 3}
       propertyPath: livesText
       value: 
       objectReference: {fileID: 2098699817}
@@ -7266,6 +7270,10 @@ PrefabInstance:
       propertyPath: gameOverSound
       value: 
       objectReference: {fileID: 8300000, guid: d17c0b33979371b409ff64f606e922e7, type: 3}
+    - target: {fileID: 4737271572195420294, guid: 2fb1462229549c04faee7deced533962, type: 3}
+      propertyPath: highScoreText
+      value: 
+      objectReference: {fileID: 914426481}
     - target: {fileID: 4737271572195420294, guid: 2fb1462229549c04faee7deced533962, type: 3}
       propertyPath: lifeLostSound
       value: 
@@ -7321,7 +7329,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -9, y: 15}
+  m_AnchoredPosition: {x: -9, y: 14.999512}
   m_SizeDelta: {x: -1820, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!61 &1813768001
