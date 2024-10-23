@@ -4,17 +4,25 @@ using UnityEngine.UI;
 public class Platform : MonoBehaviour
 {
     [SerializeField] private Slider movementSlider;
-    [SerializeField] private float bounds = 7.5f;
     [SerializeField] private float smoothTime = 0.05f;
 
     private float velocity = 0.0f;
     private GameObject ball;
     private bool isAutoMode = false;
+    private float initialScreenWidth;
+
+    private Rigidbody2D rb;
+
+    // New public GameObjects for bounds
+    public GameObject leftBound;
+    public GameObject rightBound;
 
     private void Start()
     {
         FindBall();
         movementSlider.value = 0.5f;
+        initialScreenWidth = Screen.width;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     public void FindBall()
@@ -29,24 +37,51 @@ public class Platform : MonoBehaviour
             isAutoMode = !isAutoMode;
         }
 
-        Vector2 playerPosition = transform.position;
+        // Check for screen size change
+        if (Screen.width != initialScreenWidth)
+        {
+            AdjustSlider();
+            initialScreenWidth = Screen.width;
+        }
+
+        Vector2 playerPosition = rb.position;
 
         if (isAutoMode)
         {
             GameObject target = FindClosestTarget();
             if (target != null)
             {
-                float targetPositionX = Mathf.Clamp(target.transform.position.x, -bounds, bounds);
-                playerPosition.x = targetPositionX; // Movimiento instantáneo sin suavizado
+                float targetPositionX = target.transform.position.x;
+                playerPosition.x = targetPositionX; // Instant movement without smoothing
             }
         }
         else
         {
-            float targetPositionX = Mathf.Lerp(-bounds, bounds, movementSlider.value);
+            float targetPositionX = Mathf.Lerp(-7.5f, 7.5f, movementSlider.value);
             playerPosition.x = Mathf.SmoothDamp(playerPosition.x, targetPositionX, ref velocity, smoothTime);
         }
 
-        transform.position = playerPosition;
+        // Check for collisions with bounds
+        if (leftBound != null && rightBound != null)
+        {
+            if (playerPosition.x < leftBound.transform.position.x)
+            {
+                playerPosition.x = leftBound.transform.position.x;
+            }
+            else if (playerPosition.x > rightBound.transform.position.x)
+            {
+                playerPosition.x = rightBound.transform.position.x;
+            }
+        }
+
+        rb.MovePosition(playerPosition);
+    }
+
+    private void AdjustSlider()
+    {
+        // Adjust slider value proportionally
+        float newSliderValue = movementSlider.value * (initialScreenWidth / Screen.width);
+        movementSlider.value = Mathf.Clamp(newSliderValue, 0, 1);
     }
 
     private GameObject FindClosestTarget()
