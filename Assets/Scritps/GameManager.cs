@@ -133,6 +133,8 @@ public class GameManager : MonoBehaviour
         newBallScript.StartCoroutine(newBallScript.AutoLaunch());
     }
 
+
+
     private void UpdateUI()
     {
         scoreText.text = "Score: " + score;
@@ -178,5 +180,6 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("CurrentScore", score);
         PlayerPrefs.SetInt("CurrentLives", lives);
         UpdateUI();
+        SceneManager.LoadScene(0);
     }
 }

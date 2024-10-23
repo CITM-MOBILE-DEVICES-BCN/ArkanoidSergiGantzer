@@ -1305,7 +1305,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1037747570}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: PlayGame
+        m_MethodName: NewGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1980,9 +1980,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Buttons, Assembly-CSharp
-        m_MethodName: OnContinueButtonPressed
+      - m_Target: {fileID: 1037747570}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: PlayGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

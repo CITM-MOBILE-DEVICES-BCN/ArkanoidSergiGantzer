@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class NewGameButton : MonoBehaviour
@@ -48,5 +49,6 @@ public class NewGameButton : MonoBehaviour
         PlayerPrefs.SetInt("CurrentScore", 0);
         PlayerPrefs.SetInt("CurrentLives", 3);
         GameManager.Instance.ResetGameState();
+        SceneManager.LoadScene(0);
     }
 }
