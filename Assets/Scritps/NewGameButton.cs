@@ -19,13 +19,11 @@ public class NewGameButton : MonoBehaviour
         audioSource.clip = audioClip;
 
         newGameButton.onClick.AddListener(OnNewGameButtonPressed);
-        Debug.Log("NewGameButton: Start method called, listener added.");
     }
 
     void OnNewGameButtonPressed()
     {
         // Inicio de una nueva partida
-        Debug.Log("NewGameButton: OnNewGameButtonPressed method called.");
         audioSource.Play();
         StartCoroutine(WaitForAudioToEnd());
     }
@@ -33,12 +31,10 @@ public class NewGameButton : MonoBehaviour
     IEnumerator WaitForAudioToEnd()
     {
         // Espera a que termine la reproducción del audio
-        Debug.Log("NewGameButton: WaitForAudioToEnd coroutine started.");
         while (audioSource.isPlaying)
         {
             yield return null;
         }
-        Debug.Log("NewGameButton: Audio finished playing, calling ResetGame.");
         ResetGame();
         mainMenu.PlayGame();
     }
