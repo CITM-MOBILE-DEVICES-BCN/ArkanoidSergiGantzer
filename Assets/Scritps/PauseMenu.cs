@@ -3,16 +3,19 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    // Variables
     public GameObject pauseMenuUI;
     private bool isPaused = false;
 
     void Start()
     {
+        // Inicialización de variables
         pauseMenuUI.SetActive(false);
     }
 
     void Update()
     {
+        // Pausa del juego
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
@@ -28,6 +31,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
+        //  Continuar la partida
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
@@ -35,6 +39,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
+        // Pausar la partida
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
@@ -42,6 +47,7 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMainMenu()
     {
+        // Cargar el menú principal
         SaveGame();
         Time.timeScale = 1f;
         SceneManager.LoadScene(3);
@@ -49,6 +55,7 @@ public class PauseMenu : MonoBehaviour
 
     public void HandleButtonAction(string action)
     {
+        // Manejo de las acciones de los botones
         switch (action)
         {
             case "Resume":
@@ -65,6 +72,7 @@ public class PauseMenu : MonoBehaviour
 
     private void SaveGame()
     {
+        // Guardar la partida
         PlayerPrefs.SetInt("CurrentScore", GameManager.Instance.GetScore());
         PlayerPrefs.SetInt("CurrentLives", GameManager.Instance.GetLives());
         PlayerPrefs.SetInt("CurrentLevel", PlayerPrefs.GetInt("CurrentLevel", 1));

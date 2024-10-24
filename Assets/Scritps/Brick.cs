@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Brick : MonoBehaviour
 {
+    // Variables
     public int hp;
     private SpriteRenderer spriteRenderer;
     private Collider2D blockCollider;
@@ -15,6 +16,7 @@ public class Brick : MonoBehaviour
 
     private void Start()
     {
+        // Inicialización de variables
         spriteRenderer = GetComponent<SpriteRenderer>();
         blockCollider = GetComponent<Collider2D>();
         audioSource = gameObject.AddComponent<AudioSource>();
@@ -23,10 +25,12 @@ public class Brick : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // Colisión con la bola
         if (isColliding) return;
 
         if (collision.gameObject.CompareTag("Ball"))
         {
+            // Actualización de la vida del bloque
             isColliding = true;
             hp--;
             if (hp > 0)
@@ -36,6 +40,7 @@ public class Brick : MonoBehaviour
             }
             else
             {
+                // Destrucción del bloque
                 PlayDestroySound();
                 TryDropPowerUp();
                 Destroy(gameObject);
@@ -54,6 +59,7 @@ public class Brick : MonoBehaviour
 
     private void UpdateBlockAppearance()
     {
+        // Actualización del sprite del bloque
         if (hp > 0 && hp <= blockSprites.Length)
         {
             spriteRenderer.sprite = blockSprites[blockSprites.Length - hp];
@@ -62,11 +68,13 @@ public class Brick : MonoBehaviour
 
     private void ResetCollisionFlag()
     {
+        // Reinicio de la bandera de colisión
         isColliding = false;
     }
 
     private void PlayDestroySound()
     {
+        // Reproducción del sonido de destrucción
         if (destroySound != null)
         {
             GameObject soundObject = new GameObject("BlockDestroySound");
@@ -81,6 +89,7 @@ public class Brick : MonoBehaviour
 
     private void TryDropPowerUp()
     {
+        // Probabilidad de soltar power-up
         if (powerUpPrefab != null && Random.value <= powerUpDropChance)
         {
             Instantiate(powerUpPrefab, transform.position, Quaternion.identity);

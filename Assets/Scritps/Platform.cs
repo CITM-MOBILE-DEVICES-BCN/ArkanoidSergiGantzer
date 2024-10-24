@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class Platform : MonoBehaviour
 {
+    // Variables
     [SerializeField] private Slider movementSlider;
     [SerializeField] private float smoothTime = 0.05f;
 
@@ -13,12 +14,13 @@ public class Platform : MonoBehaviour
 
     private Rigidbody2D rb;
 
-    // New public GameObjects for bounds
+    // Métodos
     public GameObject leftBound;
     public GameObject rightBound;
 
     private void Start()
     {
+        // Inicialización de variables
         FindBall();
         movementSlider.value = 0.5f;
         initialScreenWidth = Screen.width;
@@ -27,17 +29,19 @@ public class Platform : MonoBehaviour
 
     public void FindBall()
     {
+        // Buscar la bola en la escena
         ball = GameObject.FindGameObjectWithTag("Ball");
     }
 
     private void Update()
     {
+        // Cambio de modo de control
         if (Input.GetKeyDown(KeyCode.Space))
         {
             isAutoMode = !isAutoMode;
         }
 
-        // Check for screen size change
+        // Ajuste del slider
         if (Screen.width != initialScreenWidth)
         {
             AdjustSlider();
@@ -48,6 +52,7 @@ public class Platform : MonoBehaviour
 
         if (isAutoMode)
         {
+            // Movimiento automático
             GameObject target = FindClosestTarget();
             if (target != null)
             {
@@ -57,11 +62,12 @@ public class Platform : MonoBehaviour
         }
         else
         {
+            // Movimiento manual
             float targetPositionX = Mathf.Lerp(-7.5f, 7.5f, movementSlider.value);
             playerPosition.x = Mathf.SmoothDamp(playerPosition.x, targetPositionX, ref velocity, smoothTime);
         }
 
-        // Check for collisions with bounds
+        // Limitar el movimiento a los límites
         if (leftBound != null && rightBound != null)
         {
             if (playerPosition.x < leftBound.transform.position.x)
@@ -79,13 +85,14 @@ public class Platform : MonoBehaviour
 
     private void AdjustSlider()
     {
-        // Adjust slider value proportionally
+        // Ajuste del slider al cambiar el tamaño de la pantalla
         float newSliderValue = movementSlider.value * (initialScreenWidth / Screen.width);
         movementSlider.value = Mathf.Clamp(newSliderValue, 0, 1);
     }
 
     private GameObject FindClosestTarget()
     {
+        // Buscar el objetivo más cercano
         GameObject closestTarget = ball;
         float closestDistance = Mathf.Infinity;
 
@@ -102,6 +109,7 @@ public class Platform : MonoBehaviour
 
         if (ball != null)
         {
+            // Calcular la distancia a la bola
             float ballDistance = Mathf.Abs(transform.position.y - ball.transform.position.y);
             if (ballDistance < closestDistance || (ballDistance == closestDistance && closestTarget != ball))
             {
@@ -114,6 +122,7 @@ public class Platform : MonoBehaviour
 
     public void IncreaseBallSize()
     {
+        // Aumentar el tamaño de la bola
         if (ball != null)
         {
             Ball ballScript = ball.GetComponent<Ball>();
@@ -126,6 +135,7 @@ public class Platform : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // Colisión con power-up
         if (other.CompareTag("PowerUp"))
         {
             GameManager.Instance.IncreaseScore(100);

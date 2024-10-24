@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class NewGameButton : MonoBehaviour
 {
+    // Variables
     public Button newGameButton;
     public AudioClip audioClip;
     public MainMenu mainMenu;
@@ -13,6 +14,7 @@ public class NewGameButton : MonoBehaviour
 
     void Start()
     {
+        // Inicialización de variables
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.clip = audioClip;
 
@@ -22,6 +24,7 @@ public class NewGameButton : MonoBehaviour
 
     void OnNewGameButtonPressed()
     {
+        // Inicio de una nueva partida
         Debug.Log("NewGameButton: OnNewGameButtonPressed method called.");
         audioSource.Play();
         StartCoroutine(WaitForAudioToEnd());
@@ -29,6 +32,7 @@ public class NewGameButton : MonoBehaviour
 
     IEnumerator WaitForAudioToEnd()
     {
+        // Espera a que termine la reproducción del audio
         Debug.Log("NewGameButton: WaitForAudioToEnd coroutine started.");
         while (audioSource.isPlaying)
         {
@@ -41,6 +45,7 @@ public class NewGameButton : MonoBehaviour
 
     private void ResetGame()
     {
+        // Reinicio de la partida
         Debug.Log("NewGameButton: ResetGame method called.");
         int highScore = PlayerPrefs.GetInt("HighScore", 0);
         PlayerPrefs.DeleteAll();

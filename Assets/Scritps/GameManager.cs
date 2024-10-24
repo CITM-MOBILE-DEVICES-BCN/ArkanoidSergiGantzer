@@ -4,6 +4,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    // Variables
     public static GameManager Instance { get; private set; }
 
     [SerializeField] private TextMeshProUGUI scoreText;
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        // Singleton pattern
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -36,6 +38,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        // Inicialización de variables
         blocksLeft = GameObject.FindGameObjectsWithTag("Block").Length;
         audioSource = gameObject.AddComponent<AudioSource>();
         score = PlayerPrefs.GetInt("CurrentScore", 0);
@@ -46,12 +49,14 @@ public class GameManager : MonoBehaviour
 
     public void BlockDestroyed()
     {
+        // Actualización de la puntuación y los bloques restantes
         IncreaseScore(50);
         blocksLeft--;
         UpdateUI();
 
         if (blocksLeft <= 0 && !isLevelCleared)
         {
+            // Comprobación de nivel completado 
             isLevelCleared = true;
             int currentLevel = PlayerPrefs.GetInt("CurrentLevel", 1);
             PlayerPrefs.SetInt("CurrentLevel", currentLevel + 1);
@@ -63,12 +68,14 @@ public class GameManager : MonoBehaviour
 
     public void BlockHit()
     {
+        // Actualización de la puntuación
         IncreaseScore(10);
         UpdateUI();
     }
 
     public void LoadNextLevel()
     {
+        // Carga de la siguiente escena
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         if (currentSceneIndex == 5)
         {
@@ -91,11 +98,13 @@ public class GameManager : MonoBehaviour
 
     public void ReloadScene()
     {
+        // Recarga de la escena actual
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void BallFell()
     {
+        // Actualización de vidas
         lives--;
         if (lives != 0)
         {
@@ -118,11 +127,13 @@ public class GameManager : MonoBehaviour
 
     private void LoadGameOverScene()
     {
+        // Carga de la escena de fin de partida
         SceneManager.LoadScene(4);
     }
 
     public void RespawnBall()
     {
+        // Respawn de la bola
         GameObject newBall = Instantiate(ballPrefab, platform.position + new Vector3(0, 1f, 0), Quaternion.identity);
         newBall.transform.SetParent(platform, false);
         newBall.transform.localScale = new Vector3(1f, 1f, 1f);
@@ -137,6 +148,7 @@ public class GameManager : MonoBehaviour
 
     private void UpdateUI()
     {
+        // Actualización de la interfaz de usuario
         scoreText.text = "Score: " + score;
         livesText.text = "Lives: " + lives;
         highScoreText.text = "High Score: " + PlayerPrefs.GetInt("HighScore", 0);
@@ -145,6 +157,7 @@ public class GameManager : MonoBehaviour
 
     private void PlaySound(AudioClip clip)
     {
+        // Reproducción de sonido
         if (clip != null)
         {
             audioSource.PlayOneShot(clip);
@@ -153,6 +166,7 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseScore(int amount)
     {
+        // Aumento de la puntuación
         score += amount;
         int highScore = PlayerPrefs.GetInt("HighScore", 0);
         if (score > highScore)
@@ -163,16 +177,19 @@ public class GameManager : MonoBehaviour
 
     public int GetScore()
     {
+        // Obtención de la puntuación
         return score;
     }
 
     public int GetLives()
     {
+        // Obtención de las vidas
         return lives;
     }
 
     public void ResetGameState()
     {
+        // Reinicio del estado del juego
         Debug.Log("GameManager: ResetGameState method called.");
         score = 0;
         lives = 3;
