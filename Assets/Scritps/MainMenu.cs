@@ -5,14 +5,14 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
-        // Load the last played level
+        // Cargar la partida guardada
         int currentLevel = PlayerPrefs.GetInt("CurrentLevel", 1);
         SceneManager.LoadSceneAsync(currentLevel -1);
     }
 
     public void NewGame()
     {
-        // Reset the game state
+        // Iniciar una nueva partida
         PlayerPrefs.SetInt("CurrentScore", 0);
         PlayerPrefs.SetInt("CurrentLives", 3);
         PlayerPrefs.SetInt("CurrentLevel", 1);
@@ -21,7 +21,7 @@ public class MainMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        // Quit the application
+        // Salir del juego
         Application.Quit();
     }
 }
