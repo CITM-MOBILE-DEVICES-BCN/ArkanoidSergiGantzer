@@ -2,6 +2,10 @@ WeTransfer link to the video:
 
 https://we.tl/t-jJx9dmR62b
 
+Youtube link to the video:
+
+https://youtu.be/d_ZsNT0B7VI
+
 YouTube tutorials I used to create the Arkanoid:
 
 https://www.youtube.com/watch?v=lOyb0_rFA1A&t=256s
