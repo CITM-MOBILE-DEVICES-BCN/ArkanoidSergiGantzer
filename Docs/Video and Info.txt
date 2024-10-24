@@ -1,12 +1,18 @@
-WeTransfer link to the video:
+- WeTransfer link to the video:
 
 https://we.tl/t-jJx9dmR62b
 
-Youtube link to the video:
+- Youtube link to the video explanation of the project and code:
 
 https://youtu.be/d_ZsNT0B7VI
 
-YouTube tutorials I used to create the Arkanoid:
+- Youtube link to the gameplay:
+
+https://youtu.be/Div9mGs2eww
+
+
+
+- YouTube tutorials I used to create the Arkanoid:
 
 https://www.youtube.com/watch?v=lOyb0_rFA1A&t=256s
 https://www.youtube.com/watch?v=DX7HyN7oJjE

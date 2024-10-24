@@ -500,7 +500,7 @@ PrefabInstance:
       objectReference: {fileID: 241761400}
     - target: {fileID: 1921096924167295618, guid: 6e8dc4f861fb3ef49b1fc557cfa21374, type: 3}
       propertyPath: smoothTime
-      value: 0.05
+      value: 0.001
       objectReference: {fileID: 0}
     - target: {fileID: 1921096924167295618, guid: 6e8dc4f861fb3ef49b1fc557cfa21374, type: 3}
       propertyPath: movementSlider
